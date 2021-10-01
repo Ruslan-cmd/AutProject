@@ -11,10 +11,11 @@ class EmployeeFactory extends Factory
 
     public function definition()
     {
-        $passes = Pass::inRandomOrder()->first();
+        // $passes = Pass::inRandomOrder()->first();
+
         return [
             'full_name' => $this->faker->name,
-            'pass_id' => $passes
+            'pass_id' => Pass::factory()
         ];
     }
 }

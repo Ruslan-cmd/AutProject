@@ -4,12 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class NumbersTable extends Migration
+class PassNumbersTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('numbers', function (Blueprint $table) {
+        Schema::create('pass_numbers', function (Blueprint $table) {
 
             $table->bigIncrements('id');
             $table->unsignedBigInteger('pass_id');
@@ -24,6 +24,6 @@ class NumbersTable extends Migration
 
     public function down()
     {
-        Schema::drop('numbers');
+        Schema::dropIfExists('pass_numbers');
     }
 }

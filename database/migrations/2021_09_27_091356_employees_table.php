@@ -11,17 +11,18 @@ class EmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
 
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('pass_id');
-            $table->string('full_name');
+            $table->id();
+            $table->foreignId('pass_id')->constrained('passes')->index()->cascadeOnDelete();
+            // $table->unsignedBigInteger('pass_id');
+            $table->string('full_name')->index();
             $table->timestamps();
-            $table->foreign('pass_id')->references('id')->on('passes')->onDelete('cascade');
+            //  $table->foreign('pass_id')->references('id')->on('passes')->onDelete('cascade');
         });
     }
 
 
     public function down()
     {
-        Schema::drop('employees');
+        Schema::dropIfExists('employees');
     }
 }

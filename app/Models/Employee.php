@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
-    protected  $guarded =[];
+
+    protected $guarded = [];
+
     public function pass()
     {
         return $this->belongsTo(Pass::class);

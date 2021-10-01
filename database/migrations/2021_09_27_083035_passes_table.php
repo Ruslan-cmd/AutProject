@@ -11,13 +11,13 @@ class PassesTable extends Migration
     {
         Schema::create('passes', function (Blueprint $table) {
 
-            $table->bigIncrements('id');
+            $table->id();
 
         });
     }
 
     public function down()
     {
-        Schema::drop('passes');
+        Schema::dropIfExists('passes');
     }
 }
