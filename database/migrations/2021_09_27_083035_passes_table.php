@@ -10,9 +10,8 @@ class PassesTable extends Migration
     public function up()
     {
         Schema::create('passes', function (Blueprint $table) {
-
             $table->id();
-
+            $table->timestamps();
         });
     }
 

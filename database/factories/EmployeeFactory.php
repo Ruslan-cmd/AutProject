@@ -10,10 +10,8 @@ class EmployeeFactory extends Factory
 {
     protected $model = Employee::class;
 
-    public function definition()
+    public function definition(): array
     {
-        // $passes = Pass::inRandomOrder()->first();
-
         return [
             'full_name' => $this->faker->name,
             'pass_id' => Pass::factory()
