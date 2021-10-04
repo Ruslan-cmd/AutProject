@@ -12,12 +12,11 @@ class PassNumbersTable extends Migration
         Schema::create('pass_numbers', function (Blueprint $table) {
 
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('pass_id');
+            $table->foreignId('pass_id')->index()->constrained('passes')->cascadeOnDelete();
             $table->string('card_number');
             $table->string('system_number');
-            $table->string('status');
+            $table->boolean('is_active')->default(true)->index();
             $table->timestamps();
-            $table->foreign('pass_id')->references('id')->on('passes')->onDelete('cascade');
         });
     }
 

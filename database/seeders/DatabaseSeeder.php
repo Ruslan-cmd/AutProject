@@ -9,8 +9,8 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        $this->call(PassesSeeder::class);
-        $this->call(EmployeesSeeder::class);
-        $this->call(PassNumbersSeeder::class);
+        $this->call(StandardEmployeesSeeder::class);
+        $this->call(EmployeesWithLostPassesSeeder::class);
+        $this->call(FiredEmployeesSeeder::class);
     }
 }

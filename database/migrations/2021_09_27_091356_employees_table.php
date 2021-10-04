@@ -10,13 +10,10 @@ class EmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-
             $table->id();
-            $table->foreignId('pass_id')->constrained('passes')->index()->cascadeOnDelete();
-            // $table->unsignedBigInteger('pass_id');
             $table->string('full_name')->index();
+            $table->foreignId('pass_id')->index()->constrained('passes')->cascadeOnDelete();
             $table->timestamps();
-            //  $table->foreign('pass_id')->references('id')->on('passes')->onDelete('cascade');
         });
     }
 
