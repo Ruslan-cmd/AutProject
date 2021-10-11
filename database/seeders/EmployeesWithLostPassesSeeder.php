@@ -20,9 +20,9 @@ class EmployeesWithLostPassesSeeder extends Seeder
 
     private function markPassNumbersAsInactive(Collection $employees)
     {
-        $passIds = $employees->pluck('pass_id');
+        $passIds = $employees->pluck('pass_id'); //извлечение значений по ключу
 
-        PassNumber::whereIn('pass_id', $passIds)->update(['is_active' => false]);
+        PassNumber::whereIn('pass_id', $passIds)->update(['is_active' => false]); //проверка что значения столбца pass_id содержатся в массиве, далее перевод статуса
     }
 
     private function createNewNumberForPasses(Collection $employees)

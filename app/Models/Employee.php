@@ -11,6 +11,10 @@ class Employee extends Model
     use HasFactory;
 
     protected $guarded = [];
+    /**
+     * @var mixed
+     */
+    public $pass;
 
     public function pass(): BelongsTo
     {
