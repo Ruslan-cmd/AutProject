@@ -13,4 +13,5 @@ use App\Http\Controllers;
 |
 */
 
-Route::get('/show_history', 'StartController@showHistory') -> name('show_history');
+Route::get('/show_history', 'StartController@showHistoryForm') -> name('show_history');
+Route::post( '/show_history','StartController@showHistoryFormTest') -> name('show_history_send');

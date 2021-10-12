@@ -11,9 +11,9 @@
         <div id="menu">
             <ul>
                 <li class="main-title"><a href="{{route('show_history')}}" accesskey="1" title="">Форма для просмотра истории пропусков</a></li>
-                <li class="main-title"><a href="{{route('view')}}" accesskey="2" title="">Форма изменения статуса пропуска после утери</a></li>
-                <li class="main-title"><a href="{{route('view')}}" accesskey="2" title="">Форма для заведения данных на нового сотрудника по существующим пропускам </a></li>
-                <li class="main-title"><a href="{{route('view')}}" accesskey="2" title="">Форма для добавления в базу данных новых пропусков</a></li>
+                <li class="main-title"><a href="#" accesskey="2" title="">Форма изменения статуса пропуска после утери</a></li>
+                <li class="main-title"><a href="#" accesskey="2" title="">Форма для заведения данных на нового сотрудника по существующим пропускам </a></li>
+                <li class="main-title"><a href="#" accesskey="2" title="">Форма для добавления в базу данных новых пропусков</a></li>
             </ul>
         </div>
     </div>
