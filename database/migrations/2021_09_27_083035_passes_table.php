@@ -12,7 +12,6 @@ class PassesTable extends Migration
         Schema::create('passes', function (Blueprint $table) {
 
             $table->id();
-            $table->timestamps();
         });
     }
 

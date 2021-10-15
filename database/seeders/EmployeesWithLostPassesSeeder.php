@@ -26,8 +26,7 @@ class EmployeesWithLostPassesSeeder extends Seeder
     }
 
     private function createNewNumberForPasses(Collection $employees)
-    {
-        /** @var Employee $employee */
+    { ///** @var Employee $employee */
         foreach ($employees as $employee) {
             PassNumber::factory()->for($employee->pass, 'pass')->create();
         }

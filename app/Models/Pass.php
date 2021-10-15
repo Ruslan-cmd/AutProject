@@ -11,6 +11,7 @@ class Pass extends Model
     use HasFactory;
 
     protected $guarded = [];
+    public $timestamps = false;
 
     public function employees(): HasMany
     {

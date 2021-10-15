@@ -27,27 +27,25 @@
                 <input class="input" type="text" name="pass_id" id="pass_id" placeholder="ID пропуска"/>
             </label></li>
         <li class="li"><label>
-                <input class="input" type="text" name="name" id="name" placeholder="Номер пропуска"/>
+                <input class="input" type="text" name="card_number" id="card_number" placeholder="Номер пропуска"/>
             </label></li>
         <li class="li"><label>
-                <input class="input" type="text" name="card_number" id="card_number" placeholder="ФИО"/>
+                <input class="input" type="text" name="full_name" id="full_name" placeholder="ФИО"/>
             </label></li>
         <li class="li"><label>
-                <input class="input" type="text" name="system_number" id="system_number" placeholder="Дата"/>
-            </label></li>
-        <li class="li"><label>
-                <input class="input" type="text" name="system_number" id="system_number" placeholder="Статус пропуска"/>
+                <input class="input" type="text" name="is_active" id="is_active" placeholder="Статус пропуска"/>
             </label></li>
     </ul>
     <button class="button" type="submit">Выполнить</button>
 </form>
+@if($dataBasedPassIds ?? '')
 <table>
     <tr>
         <th colspan="2">ID пропуска</th>
         <th colspan="2">ФИО</th>
         <th colspan="2">Дата</th>
     </tr>
-    @foreach($dataBasedPassIds as $dataBasedPassId)
+    @foreach($dataBasedPassIds ?? '' as $dataBasedPassId)
         @foreach($dataBasedPassId->employees as $employee)
             <tr>
                 <td colspan="2">{{$dataBasedPassId->id}}</td>
@@ -65,7 +63,7 @@
         <th colspan="2">Статус</th>
         <th colspan="2">Дата</th>
     </tr>
-    @foreach($dataBasedPassIds as $dataBasedPassId)
+    @foreach($dataBasedPassIds ?? '' as $dataBasedPassId)
         @foreach($dataBasedPassId->numbers as $number)
             <tr>
                 <td colspan="2">{{$dataBasedPassId->id}}</td>
@@ -77,5 +75,23 @@
             @endforeach
         @endforeach
 </table>
+@endif
+ @if($dataBasedPassNumbers ?? '')
 
+     <table>
+         <tr>
+             <th colspan="2">Номер карты</th>
+             <th colspan="2">ФИО</th>
+         </tr>
+         @foreach($dataBasedPassNumbers ?? '' as $dataBasedPassNumber)
+             @foreach($dataBasedPassNumber->employees as $employee)
+                 <tr>
+                     <td colspan="2">{{$dataBasedPassNumber->card_number}}</td>
+                     <td colspan="2">{{$employee->full_name}}</td>
+                 </tr>
+             @endforeach
+         @endforeach
+     </table>
+
+     @endif
 @endsection

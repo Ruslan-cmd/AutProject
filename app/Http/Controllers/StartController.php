@@ -22,9 +22,10 @@ class StartController extends Controller
 
         return view('show_history',
 
-            ['dataBasedPassIds' => $this->getDataBasedPassId()]
-
-        );
+            [
+                'dataBasedPassIds' => $this->getDataBasedPassId(),
+                'dataBasedPassNumbers' =>$this->getDataBasedPassNumber()
+                ]);
 
     }
 
@@ -39,11 +40,10 @@ class StartController extends Controller
 
     }
 
-    public function getDataBasedPassNumber(Request $request)
+    public function getDataBasedPassNumber()
     {
-        return Pass::query()->where('pass_number', '=', \request()->get('pass_number'))
-            ->with('pass')
-            ->with('pass.employees')
+        return PassNumber::query()->where('card_number', '=', \request()->get('card_number'))
+            ->with('employees')
             ->get();
     }
 
