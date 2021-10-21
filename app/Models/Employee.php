@@ -13,12 +13,13 @@ class Employee extends Model
 
     protected $guarded = [];
 
-    public function pass(): BelongsTo
-    {
-        return $this->belongsTo(Pass::class);
+    /*  public function pass(): BelongsTo
+      {
+          return $this->belongsTo(Pass::class);
 
-    }
-    public function passNumbers(): BelongsToMany{
+      }*/
+    public function passNumbers(): BelongsToMany
+    {
 
         return $this->belongsToMany(PassNumber::class);
     }

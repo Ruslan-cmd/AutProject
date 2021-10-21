@@ -12,7 +12,6 @@ class EmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('full_name')->index();
-            $table->foreignId('pass_id')->index()->constrained('passes')->cascadeOnDelete();
             $table->timestamps();
         });
     }

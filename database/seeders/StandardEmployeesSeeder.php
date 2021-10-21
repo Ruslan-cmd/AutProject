@@ -12,14 +12,18 @@ class StandardEmployeesSeeder extends Seeder
 
     public function run()
     {
-       $employees =  Employee::factory()->count(30)->create();
-         $this->assignPassNumber($employees);
+        PassNumber::factory()->count(30)->create();
+        $employees = Employee::factory()->count(30)->create();
+        $this->assignPassNumber($employees);
     }
 
-    public function assignPassNumber($employees){
-        foreach($employees as $employee){
-            $numbers = PassNumber::query()->get();
-        $employee->passNumbers()->sync($numbers);
+    public function assignPassNumber($employees)
+    {
+        foreach ($employees as $employee) {
+
+            $numbers = PassNumber::query()->limit(rand(1, 4))->get();
+            $employee->passNumbers()->sync($numbers);
         }
     }
 }
+

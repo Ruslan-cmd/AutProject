@@ -6,6 +6,7 @@ use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Pass;
 use App\Models\PassNumber;
+
 class EmployeeFactory extends Factory
 {
     protected $model = Employee::class;
@@ -15,7 +16,7 @@ class EmployeeFactory extends Factory
 
         return [
             'full_name' => $this->faker->name,
-            'pass_id' => Pass::factory()
+            //'pass_number_id' => PassNumber::factory()
         ];
     }
 }

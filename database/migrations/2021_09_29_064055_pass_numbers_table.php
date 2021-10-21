@@ -16,6 +16,7 @@ class PassNumbersTable extends Migration
             $table->string('card_number');
             $table->string('system_number');
             $table->boolean('is_active')->default(true)->index();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

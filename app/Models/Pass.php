@@ -13,14 +13,19 @@ class Pass extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public function employees(): HasMany
-    {
-        return $this->hasMany(Employee::class);
+    /* public function employees(): HasMany
+     {
+         return $this->hasMany(Employee::class);
 
-    }
+     }*/
 
     public function numbers(): HasMany
     {
         return $this->hasMany(PassNumber::class);
+    }
+
+    public function histories(): HasMany
+    {
+        return $this->hasMany(History::class);
     }
 }

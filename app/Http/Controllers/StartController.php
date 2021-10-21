@@ -19,13 +19,12 @@ class StartController extends Controller
     public function showHistoryFormTest()
     {
 
-
         return view('show_history',
 
             [
                 'dataBasedPassIds' => $this->getDataBasedPassId(),
-                'dataBasedPassNumbers' =>$this->getDataBasedPassNumber()
-                ]);
+                'dataBasedPassNumbers' => $this->getDataBasedPassNumber()
+            ]);
 
     }
 
