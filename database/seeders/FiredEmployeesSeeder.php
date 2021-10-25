@@ -14,19 +14,17 @@ class FiredEmployeesSeeder extends Seeder
     public function run()
     {
         $employees = Employee::factory()->count(10)->create();
-        PassNumber::factory()->count(20)->create();
-
-
-        $this->createNewEmployeesWithSamePasses($employees);
+        $passNumbers = PassNumber::factory()->count(20)->create();
+        $this->createNewEmployeesWithSamePasses($employees,$passNumbers);
         $this->assignPassNumber($employees);
     }
 
-    private function createNewEmployeesWithSamePasses(Collection $employees)
+    private function createNewEmployeesWithSamePasses(Collection $employees , Collection $passNumbers)
     {
-        $passNumbers = PassNumber::whereIn('id', $employees->pluck('id'))->get();
+        $passNumbers = $passNumbers->pluck('id');
 
         foreach ($passNumbers as $passNumber) {
-            Employee::factory()->for($passNumber)->create();
+            Employee::factory()->create();
         }
     }
 
