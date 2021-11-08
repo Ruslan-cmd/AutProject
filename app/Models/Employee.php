@@ -18,6 +18,8 @@ class Employee extends Model
           return $this->belongsTo(Pass::class);
 
       }*/
+
+
     public function passNumbers(): BelongsToMany
     {
 

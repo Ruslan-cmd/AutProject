@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,5 +14,5 @@ use App\Http\Controllers;
 |
 */
 
-Route::get('/show_history', 'StartController@showHistoryForm') -> name('show_history');
-Route::post( '/show_history','StartController@showHistoryFormTest') -> name('show_history_send');
+Route::get('/show_history', 'StartController@showHistoryForm')->name('show_history');
+Route::post('/show_history', 'StartController@showHistoryFormTest')->name('show_history_send');

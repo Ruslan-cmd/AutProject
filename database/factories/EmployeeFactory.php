@@ -13,10 +13,8 @@ class EmployeeFactory extends Factory
 
     public function definition(): array
     {
-
         return [
-            'full_name' => $this->faker->name,
-            //'pass_number_id' => PassNumber::factory()
+            'full_name' => $this->faker->name
         ];
     }
 }

@@ -21,7 +21,7 @@ class StandardEmployeesSeeder extends Seeder
     {
         foreach ($employees as $employee) {
 
-            $numbers = PassNumber::query()->inRandomOrder()->limit(rand(1,3))->get();
+            $numbers = PassNumber::query()->inRandomOrder()->limit(rand(1, 3))->get();
             $employee->passNumbers()->sync($numbers);
         }
     }
