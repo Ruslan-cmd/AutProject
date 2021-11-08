@@ -10,22 +10,12 @@ class Pass extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
     public $timestamps = false;
 
-    /* public function employees(): HasMany
-     {
-         return $this->hasMany(Employee::class);
-
-     }*/
+    protected $guarded = [];
 
     public function numbers(): HasMany
     {
         return $this->hasMany(PassNumber::class);
-    }
-
-    public function histories(): HasMany
-    {
-        return $this->hasMany(History::class);
     }
 }

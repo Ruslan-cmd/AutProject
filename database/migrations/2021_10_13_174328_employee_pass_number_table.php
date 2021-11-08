@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB as DBAlias;
 use Illuminate\Support\Facades\Schema;
 
 class EmployeePassNumberTable extends Migration
@@ -13,8 +14,8 @@ class EmployeePassNumberTable extends Migration
             $table->increments('id');
             $table->foreignId('pass_number_id')->index()->constrained('pass_numbers')->cascadeOnDelete();
             $table->foreignId('employee_id')->index()->constrained('employees')->cascadeOnDelete();
-            //$table->dateTime('employee_id');
-            //$table->dateTime('pass_number_id');
+            $table->dateTime('created_at')->nullable()->default(DBAlias::raw('CURRENT_TIMESTAMP()'));
+            $table->dateTime('deleted_at')->nullable();
         });
     }
 

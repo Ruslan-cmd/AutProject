@@ -13,6 +13,7 @@ class EmployeesTable extends Migration
             $table->id();
             $table->string('full_name')->index();
             $table->timestamps();
+            $table->dateTime('fired_at')->nullable();
         });
     }
 

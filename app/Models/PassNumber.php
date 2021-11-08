@@ -12,16 +12,17 @@ class PassNumber extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
 
     public function pass(): BelongsTo
     {
         return $this->belongsTo(Pass::class);
-
     }
 
     public function employees(): BelongsToMany
     {
-
         return $this->belongsToMany(Employee::class);
     }
 }

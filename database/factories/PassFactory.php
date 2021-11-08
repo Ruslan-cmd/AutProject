@@ -15,7 +15,13 @@ class PassFactory extends Factory
     public function definition(): array
     {
         return [
-
         ];
+    }
+
+    public function withPassNumber()
+    {
+        return $this->afterCreating(function (Pass $pass) {
+            PassNumber::factory()->for($pass)->create();
+        });
     }
 }

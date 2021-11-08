@@ -15,12 +15,11 @@ class PassNumberFactory extends Factory
 
     public function definition(): array
     {
-
         return [
-            'pass_id' => Pass::factory(),
-            'card_number' => $this->faker->numberBetween(10000, 100000),
-            'system_number' => $this->faker->numberBetween(10000, 100000),
-            'is_active' => $this->faker->numberBetween(0, 1)
+            'card_number' => $this->faker->unique()->numberBetween(10000, 100000),
+            'system_number' => $this->faker->unique()->numberBetween(10000, 100000),
+            'is_active' => true,
+            'pass_id' => Pass::factory()
         ];
     }
 }
