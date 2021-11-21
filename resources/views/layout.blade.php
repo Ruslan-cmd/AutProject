@@ -10,7 +10,7 @@
     <div id="header" class="container">
         <div id="menu">
             <ul>
-                <li class="main-title"><a href="{{route('show_history')}}" accesskey="1" title="">Форма для просмотра
+                <li class="main-title"><a href="{{route('show_history_form')}}" accesskey="1" title="">Форма для просмотра
                         истории пропусков</a></li>
                 <li class="main-title"><a href="#" accesskey="2" title="">Форма изменения статуса пропуска после
                         утери</a></li>
