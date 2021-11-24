@@ -15,6 +15,10 @@ class PassNumber extends Model
     protected $casts = [
         'is_active' => 'boolean'
     ];
+    /**
+     * @var mixed|string
+     */
+
 
     public function pass(): BelongsTo
     {

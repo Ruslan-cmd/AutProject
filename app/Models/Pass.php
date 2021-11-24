@@ -14,6 +14,8 @@ class Pass extends Model
 
     protected $guarded = [];
 
+
+
     public function numbers(): HasMany
     {
         return $this->hasMany(PassNumber::class);

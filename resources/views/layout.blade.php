@@ -12,10 +12,8 @@
             <ul>
                 <li class="main-title"><a href="{{route('show_history_form')}}" accesskey="1" title="">Форма для просмотра
                         истории пропусков</a></li>
-                <li class="main-title"><a href="#" accesskey="2" title="">Форма изменения статуса пропуска после
-                        утери</a></li>
-                <li class="main-title"><a href="#" accesskey="2" title="">Форма для заведения данных на нового
-                        сотрудника по существующим пропускам </a></li>
+                <li class="main-title"><a href="{{route('show_form_for_create_new_pass')}}" accesskey="2" title="">Форма для создания нового пропуска</a></li>
+                <li class="main-title"><a href="#" accesskey="2" title="">Форма для удаления пропуска из системы в случае утери </a></li>
                 <li class="main-title"><a href="#" accesskey="2" title="">Форма для добавления в базу данных новых
                         пропусков</a></li>
             </ul>
@@ -23,5 +21,6 @@
     </div>
 </div>
 @yield('show_history')
+@yield('show_form_for_create_new_pass')
 </body>
 
