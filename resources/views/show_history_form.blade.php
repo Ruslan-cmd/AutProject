@@ -16,7 +16,7 @@
 
 <form method='POST' action="{{route('send_id')}}">
     {{ csrf_field() }}
-    <h1>Форма получения истории пропуска по его ID</h1>
+    <h1>Получение истории пропуска по его ID</h1>
     <ul>
         <li class="li"><label>
                 <input class="input" type="text" name="id" id="id" placeholder="ID пропуска"/>
@@ -27,7 +27,7 @@
 
 <form method='POST' action="{{route('send_full_name')}}">
     {{ csrf_field() }}
-    <h1>Форма получения истории пропуска по его владельцу</h1>
+    <h1>Получение истории пропуска по его владельцу</h1>
     <ul>
         <li class="li"><label>
                 <input class="input" type="text" name="full_name" id="full_name" placeholder="ФИО"/>
