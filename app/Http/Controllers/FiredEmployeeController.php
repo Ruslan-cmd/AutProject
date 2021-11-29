@@ -23,7 +23,18 @@ class FiredEmployeeController extends Controller
             $employee->update([
                 'fired_at' => now(),
             ]);
-            //поставить отметку deleted_at на текущем пропуске (самом новом)
+
+
+            $createdAt = NULL;
+            $passNumberWithLastDateOfRelation = NULL;
+            foreach ($employee->passNumbers as $passNumber) {
+                if ($passNumber->pivot->created_at > $createdAt) {
+                    $passNumberWithLastDateOfRelation = $passNumber;
+                }
+            }
+            $employee->passNumbers()->updateExistingPivot($passNumberWithLastDateOfRelation, [
+                'deleted_at' => now()
+            ]);
 
         }
         return redirect('/showFormFiredEmployee')->with('Contact_status', 'Такого сотрудника нет в системе, вы ошиблись');

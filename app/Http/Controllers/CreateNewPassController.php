@@ -25,17 +25,15 @@ class CreateNewPassController extends Controller
             $passNumber->system_number = request('system_number');
             $passNumber->is_active = true;
             $pass->numbers()->save($passNumber);
-        }
-        elseif ((\request()->get('pass_id')) == ((Pass::query()->pluck('id')->last())+1)){
+        } elseif ((\request()->get('pass_id')) == ((Pass::query()->pluck('id')->last()) + 1)) {
             $pass = new Pass();
-        $pass->save();
-        $passNumber = new PassNumber();
-        $passNumber->card_number = request('pass_number');
-        $passNumber->system_number = request('system_number');
-        $passNumber->is_active = true;
-        $pass->numbers()->save($passNumber);
-    }
-        else return 'ERROR';
+            $pass->save();
+            $passNumber = new PassNumber();
+            $passNumber->card_number = request('pass_number');
+            $passNumber->system_number = request('system_number');
+            $passNumber->is_active = true;
+            $pass->numbers()->save($passNumber);
+        } else return 'ERROR';
     }
 
     public function validationData(Request $request)

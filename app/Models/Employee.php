@@ -15,6 +15,7 @@ class Employee extends Model
 
     public function passNumbers(): BelongsToMany
     {
-        return $this->belongsToMany(PassNumber::class);
+        return $this->belongsToMany(PassNumber::class)->withPivot('created_at', 'deleted_at');
+
     }
 }

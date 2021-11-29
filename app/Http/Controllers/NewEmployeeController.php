@@ -16,7 +16,7 @@ class NewEmployeeController extends Controller
     public function createEmployee(Request $request)
     {
         $this->validationData($request);
-        $passNumber = PassNumber::query()->where('card_number', '=',  \request('card_number'))
+        $passNumber = PassNumber::query()->where('card_number', '=', \request('card_number'))
             ->with('employees')
             ->first();
         $id = $passNumber->id;

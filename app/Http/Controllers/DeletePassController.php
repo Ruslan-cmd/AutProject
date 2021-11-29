@@ -27,15 +27,19 @@ class DeletePassController extends Controller
                 'deleted_at' => now()
             ]);
             $passNumber->save();
-                foreach ($passNumber->employees as $employee){
-                    dd($employee->pivot);
-                }
 
+            // Нахожу сотрудника с самой свежей связью с пропуском и модифицирую его deleted_at
+            $createdAt = NULL;
+            $employeeWithLastDate = NULL;
             foreach ($passNumber->employees as $employee) {
-               $passNumber->employees()->updateExistingPivot($employee, [
-                    'deleted_at' => now()
-               ]);
-             }
+                if ($employee->pivot->created_at > $createdAt) {
+                    $employeeWithLastDate = $employee;
+                }
+            }
+            $passNumber->employees()->updateExistingPivot($employeeWithLastDate, [
+                'deleted_at' => now()
+            ]);
+
         }
         return redirect('/showFormDeletePass')->with('Contact_status', 'Такого номера пропуска нет в системе, вы ошиблись');
 
