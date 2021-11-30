@@ -14,9 +14,9 @@ use App\Http\Controllers;
 |
 */
 
-Route::get('/', 'MainController@showHistoryForm')->name('show_history_form');
-Route::post('/sendId', 'MainController@sendIdAndGetHistory')->name('send_id');
-Route::post('/sendFullName', 'MainController@sendFullNameAndGetHistory')->name('send_full_name');
+Route::get('/', 'HistoryController@showHistoryForm')->name('show_history_form');
+Route::post('/sendId', 'HistoryController@sendIdAndGetHistory')->name('send_id');
+Route::post('/sendFullName', 'HistoryController@sendFullNameAndGetHistory')->name('send_full_name');
 Route::get('/showFormForCreatingNewPass', 'CreateNewPassController@showFormForCreatingNewPass')->name('show_form_for_create_new_pass');
 Route::put('/createNewPass', 'CreateNewPassController@createNewPass')->name('create_new_pass');
 Route::get('/showFormDeletePass', 'DeletePassController@showDeleteForm')->name('show_delete_form');

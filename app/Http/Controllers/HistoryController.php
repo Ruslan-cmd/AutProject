@@ -7,7 +7,7 @@ use App\Models\Pass;
 use App\Models\PassNumber;
 use Illuminate\Http\Request;
 
-class MainController extends Controller
+class HistoryController extends Controller
 {
 
     public function showHistoryForm()
