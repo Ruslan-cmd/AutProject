@@ -22,10 +22,11 @@ class HistoryController extends Controller
     {
 
         $this->validate($request, [
-            'id' => 'required|max:3',
+            'id' => 'required|max:3|numeric',
         ], [
             'id.max' => 'Длина номера карты максимум 3 символа',
             'id.required' => 'Необходимо указать номер карты',
+            'id.numeric' => 'Номер карты не может быть текстом'
         ]);
 
         $idInformation = Pass::query()
