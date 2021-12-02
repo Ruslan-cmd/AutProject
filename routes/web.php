@@ -13,10 +13,11 @@ use App\Http\Controllers;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/','MainPageController@showMainPage')->name('show_main_page');
 Route::get('/', 'HistoryController@showHistoryForm')->name('show_history_form');
 Route::post('/sendId', 'HistoryController@sendIdAndGetHistory')->name('send_id');
 Route::post('/sendFullName', 'HistoryController@sendFullNameAndGetHistory')->name('send_full_name');
+Route::post('/sendNumberOfPass', 'HistoryController@sendNumberOfPass')->name('send_number_of_pass');
 Route::get('/showFormForCreatingNewPass', 'CreateNewPassController@showFormForCreatingNewPass')->name('show_form_for_create_new_pass');
 Route::put('/createNewPass', 'CreateNewPassController@createNewPass')->name('create_new_pass');
 Route::get('/showFormDeletePass', 'DeletePassController@showDeleteForm')->name('show_delete_form');

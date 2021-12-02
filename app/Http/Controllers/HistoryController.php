@@ -64,6 +64,30 @@ class HistoryController extends Controller
             ]
         );
     }
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function sendNumberOfPass(Request $request)
+    {
 
+        $this->validate($request, [
+            'pass_number' => 'required',
+        ], [
+            'pass_number.required' => 'Необходимо номер пропуска',
+            'pass_number.numeric' => 'Номер карты не может быть текстом'
+        ]);
+        $passNumberInformation = PassNumber::query()
+            ->where('card_number', '=', \request('pass_number'))
+            ->with('employees')
+            ->get();
+        if ($passNumberInformation) {
+            return view('show_history_form', [
+                'passNumbersInforms' => $passNumberInformation
+            ]);
+        }
+        else {
+            return redirect('/showFormFiredEmployee')->with('Contact_status', 'Такого сотрудника нет в системе, вы ошиблись');
+        }
+    }
 }
 

@@ -25,6 +25,17 @@
     <button class="button" type="submit">Выполнить</button>
 </form>
 
+<form method='POST' action="{{route('send_number_of_pass')}}">
+    {{ csrf_field() }}
+    <h1>Получение истории пропуска по номеру</h1>
+    <ul>
+        <li class="li"><label>
+                <input class="input" type="text" name="pass_number" id="pass_number" placeholder="Номер карточки"/>
+            </label></li>
+    </ul>
+    <button class="button" type="submit">Выполнить</button>
+</form>
+
 <form method='POST' action="{{route('send_full_name')}}">
     {{ csrf_field() }}
     <h1>Получение истории пропуска по его владельцу</h1>
@@ -98,6 +109,38 @@
                 @endforeach
             @endforeach
         @endforeach
+    </table>
+
+@endif
+@if ($passNumbersInforms ?? '')
+    Выводимое сообщение содержит лут из пабга
+    <table>
+        <tr>
+            <th colspan="2">Номер карты
+            <th colspan="2">ID пропуска</th>
+            <th colspan="2">Дата создания пропуска после утери/регистрации в системе</th>
+            <th colspan="2">Актуальность пропуска</th>
+            <th colspan="2">Дата удаления пропуска</th>
+            <th colspan="2">Полное имя</th>
+            <th colspan="2">Дата получения сотрудником пропуска</th>
+            <th colspan="2">Дата увольнения сотрудника</th>
+        </tr>
+        @foreach($passNumbersInforms ?? '' as $passNumbersInform)
+            @foreach($passNumbersInform->employees as $employee)
+
+                    <tr>
+                        <td colspan="2">{{$passNumbersInform->card_number}}</td>
+                        <td colspan="2">{{$passNumbersInform->pass_id}}</td>
+                        <td colspan="2">{{$passNumbersInform->created_at}}</td>
+                        <td colspan="2">{{$passNumbersInform->is_active}}</td>
+                        <td colspan="2">{{$passNumbersInform->deleted_at}}</td>
+                        <td colspan="2">{{$employee->full_name}}</td>
+                        <td colspan="2">{{$employee->created_at}}</td>
+                        <td colspan="2">{{$employee->deleted_at}}</td>
+                    </tr>
+                @endforeach
+            @endforeach
+
     </table>
 
 @endif
