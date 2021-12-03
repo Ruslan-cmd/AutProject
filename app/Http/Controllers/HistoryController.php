@@ -86,7 +86,7 @@ class HistoryController extends Controller
             ]);
         }
         else {
-            return redirect('/showFormFiredEmployee')->with('Contact_status', 'Такого сотрудника нет в системе, вы ошиблись');
+            return redirect('/showHistoryForm')->with('Contact_status', 'Данного номера пропуска нет в базе данных');
         }
     }
 }
