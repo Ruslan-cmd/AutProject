@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FeedbackMail;
+
 class AuthController extends Controller
 {
     public function showLoginForm()
@@ -58,15 +59,15 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|numeric'
         ], [
-            'email.required' => 'Необходимо указать email',
-            'email.email' => 'Неверный формат',
-            'email.unique' => 'Такой email уже есть в системе',
-            'password.required' => 'Необходимо указать пароль',
-            'password.numeric' => 'Пароль должен состоять только из цифр'
-        ]
-);
-        if (auth()->attempt($data)){
-            $comment = 'lllll';
+                'email.required' => 'Необходимо указать email',
+                'email.email' => 'Неверный формат',
+                'email.unique' => 'Такой email уже есть в системе',
+                'password.required' => 'Необходимо указать пароль',
+                'password.numeric' => 'Пароль должен состоять только из цифр'
+            ]
+        );
+        if (auth()->attempt($data)) {
+            $comment = 'Обнаружен вход в систему,' . now();
             $toEmail = "progectruslan@gmail.com";
             Mail::to($toEmail)->send(new FeedbackMail($comment));
             return redirect('showHistoryForm');

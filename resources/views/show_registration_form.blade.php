@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="{{asset('css/css.css')}}"/>
+</head>
 Регистрация в системе
 @if ($errors->any())
     @foreach ($errors->all() as $message)

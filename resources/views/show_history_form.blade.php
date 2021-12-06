@@ -128,18 +128,18 @@
         @foreach($passNumbersInforms ?? '' as $passNumbersInform)
             @foreach($passNumbersInform->employees as $employee)
 
-                    <tr>
-                        <td colspan="2">{{$passNumbersInform->card_number}}</td>
-                        <td colspan="2">{{$passNumbersInform->pass_id}}</td>
-                        <td colspan="2">{{$passNumbersInform->created_at}}</td>
-                        <td colspan="2">{{$passNumbersInform->is_active}}</td>
-                        <td colspan="2">{{$passNumbersInform->deleted_at}}</td>
-                        <td colspan="2">{{$employee->full_name}}</td>
-                        <td colspan="2">{{$employee->created_at}}</td>
-                        <td colspan="2">{{$employee->deleted_at}}</td>
-                    </tr>
-                @endforeach
+                <tr>
+                    <td colspan="2">{{$passNumbersInform->card_number}}</td>
+                    <td colspan="2">{{$passNumbersInform->pass_id}}</td>
+                    <td colspan="2">{{$passNumbersInform->created_at}}</td>
+                    <td colspan="2">{{$passNumbersInform->is_active}}</td>
+                    <td colspan="2">{{$passNumbersInform->deleted_at}}</td>
+                    <td colspan="2">{{$employee->full_name}}</td>
+                    <td colspan="2">{{$employee->created_at}}</td>
+                    <td colspan="2">{{$employee->deleted_at}}</td>
+                </tr>
             @endforeach
+        @endforeach
 
     </table>
 

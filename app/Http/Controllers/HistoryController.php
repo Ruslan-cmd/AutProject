@@ -24,7 +24,7 @@ class HistoryController extends Controller
         $this->validate($request, [
             'id' => 'required|max:3|numeric',
         ], [
-            'id.max' => 'Длина номера карты максимум 3 символа',
+            'id.max' => 'Длина id карты максимум 3 символа',
             'id.required' => 'Необходимо указать номер карты',
             'id.numeric' => 'Номер карты не может быть текстом'
         ]);
@@ -64,6 +64,7 @@ class HistoryController extends Controller
             ]
         );
     }
+
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -84,8 +85,7 @@ class HistoryController extends Controller
             return view('show_history_form', [
                 'passNumbersInforms' => $passNumberInformation
             ]);
-        }
-        else {
+        } else {
             return redirect('/showHistoryForm')->with('Contact_status', 'Данного номера пропуска нет в базе данных');
         }
     }
