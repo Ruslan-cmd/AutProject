@@ -13,6 +13,15 @@
         </p>
     @endforeach
 @endif
+@if (session('status_of_id'))
+    <p class="success" id="reserv_success_msg">{{session('status_of_id')}}</p>
+@endif
+@if (session('status_of_full_name'))
+    <p class="success" id="reserv_success_msg">{{session('status_of_full_name')}}</p>
+@endif
+@if (session('status_of_number'))
+    <p class="success" id="reserv_success_msg">{{session('status_of_number')}}</p>
+@endif
 
 <form method='POST' action="{{route('send_id')}}">
     {{ csrf_field() }}
@@ -47,8 +56,7 @@
     <button class="button" type="submit">Выполнить</button>
 </form>
 
-@if ($idInforms ?? '')
-    Выводимое сообщение содержит лут из пабга
+@if ($idInforms  ?? '')
     <table>
         <tr>
             <th colspan="2">ID пропуска</th>
@@ -60,7 +68,7 @@
             <th colspan="2">Дата увольнения сотрудника</th>
 
         </tr>
-        @foreach($idInforms ?? '' as $idInform)
+        @foreach($idInforms ?? ''  as $idInform)
             @foreach($idInform->numbers as $number)
                 @foreach($number->employees as $employee)
                     <tr>
@@ -79,7 +87,6 @@
 
 @endif
 @if ($fullNameInforms ?? '')
-    Выводимое сообщение содержит лут из пабга
     <table>
         <tr>
             <th colspan="2">Полное имя</th>
@@ -113,7 +120,7 @@
 
 @endif
 @if ($passNumbersInforms ?? '')
-    Выводимое сообщение содержит лут из пабга
+
     <table>
         <tr>
             <th colspan="2">Номер карты

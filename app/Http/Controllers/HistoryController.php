@@ -15,18 +15,20 @@ class HistoryController extends Controller
         return view('show_history_form');
     }
 
-    /**
-     * @throws \Illuminate\Validation\ValidationException
-     */
+
+
     public function sendIdAndGetHistory(Request $request)
     {
 
         $this->validate($request, [
-            'id' => 'required|max:3|numeric',
+            'id' => 'required|numeric|exists:passes,id',
         ], [
-            'id.max' => 'Длина id карты максимум 3 символа',
+
             'id.required' => 'Необходимо указать номер карты',
-            'id.numeric' => 'Номер карты не может быть текстом'
+            'id.numeric' => 'Номер карты не может быть текстом',
+            //'id.max' => 'Максимум 3 символа',
+            'id.exists'=> 'Данного значения нет в базе данных'
+
         ]);
 
         $idInformation = Pass::query()
@@ -34,6 +36,9 @@ class HistoryController extends Controller
             ->with('numbers', 'numbers.employees')
             ->get(); //беру коллекцию элементов, исходя из данных запроса
 
+        //if ($idInformation->count() == 0) {
+        //    return redirect('/showHistoryForm')->with('status_of_id', 'Данный ID не найден в базе данных');
+       // }
 
         return view('show_history_form', [
                 'idInforms' => $idInformation
@@ -42,9 +47,7 @@ class HistoryController extends Controller
 
     }
 
-    /**
-     * @throws \Illuminate\Validation\ValidationException
-     */
+
     public function sendFullNameAndGetHistory(Request $request)
     {
         $this->validate($request, [
@@ -57,7 +60,9 @@ class HistoryController extends Controller
             ->where('full_name', '=', \request()->get('full_name'))
             ->with('passNumbers', 'passNumbers.pass')
             ->get();
-
+        if ($fullNameInformation->count() == 0) {
+            return redirect('/showHistoryForm')->with('status_of_full_name', 'Данный пользователь не найден в базе данных');
+        }
 
         return view('show_history_form', [
                 'fullNameInforms' => $fullNameInformation
@@ -65,9 +70,7 @@ class HistoryController extends Controller
         );
     }
 
-    /**
-     * @throws \Illuminate\Validation\ValidationException
-     */
+
     public function sendNumberOfPass(Request $request)
     {
 
@@ -78,16 +81,19 @@ class HistoryController extends Controller
             'pass_number.numeric' => 'Номер карты не может быть текстом'
         ]);
         $passNumberInformation = PassNumber::query()
-            ->where('card_number', '=', \request('pass_number'))
+            ->where('card_number', '=', \request()->get('pass_number'))
             ->with('employees')
             ->get();
-        if ($passNumberInformation) {
-            return view('show_history_form', [
-                'passNumbersInforms' => $passNumberInformation
-            ]);
-        } else {
-            return redirect('/showHistoryForm')->with('Contact_status', 'Данного номера пропуска нет в базе данных');
+
+
+        if ($passNumberInformation->count() == 0) {
+            return redirect('/showHistoryForm')->with('status_of_number', 'Данный номер пропуска не найден в базе данных');
         }
+
+        return view('show_history_form', [
+            'passNumbersInforms' => $passNumberInformation
+        ]);
+
     }
 }
 

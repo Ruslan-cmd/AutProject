@@ -13,20 +13,25 @@ use App\Http\Controllers;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//login
 Route::get('/','AuthController@showLoginForm')->name('show_login_form');
 Route::get('/showRegisterForm','AuthController@showRegisterForm')->name('show_register_form');
 Route::post('/register','AuthController@register')->name('register');
 Route::post('/login','AuthController@login')->name('login');
-
+//history
 Route::get('/showHistoryForm', 'HistoryController@showHistoryForm')->name('show_history_form');
 Route::post('/sendId', 'HistoryController@sendIdAndGetHistory')->name('send_id');
 Route::post('/sendFullName', 'HistoryController@sendFullNameAndGetHistory')->name('send_full_name');
 Route::post('/sendNumberOfPass', 'HistoryController@sendNumberOfPass')->name('send_number_of_pass');
+//new pass
 Route::get('/showFormForCreatingNewPass', 'CreateNewPassController@showFormForCreatingNewPass')->name('show_form_for_create_new_pass');
 Route::put('/createNewPass', 'CreateNewPassController@createNewPass')->name('create_new_pass');
+//delete pass
 Route::get('/showFormDeletePass', 'DeletePassController@showDeleteForm')->name('show_delete_form');
 Route::put('/deletePass', 'DeletePassController@deletePass')->name('delete_pass');
+//fired employee
 Route::get('/showFormFiredEmployee', 'FiredEmployeeController@showFormForFiredEmployee')->name('show_form_fired_employee');
 Route::put('/fireEmployee', 'FiredEmployeeController@fireEmployee')->name('fire_employee');
+//new employee
 Route::get('/showFormCreateNewEmployee', 'NewEmployeeController@showFormCreateNewEmployee')->name('show_form_create_new_employee');
 Route::put('/createEmployee', 'NewEmployeeController@createEmployee')->name('create_employee');

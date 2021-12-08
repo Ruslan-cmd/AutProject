@@ -29,9 +29,12 @@ class RouteTest extends TestCase
 
     public function test_interacting_with_headers()
     {
-        $response = $this->post('/sendId', ['id' => '12']);
 
+        $response = $this->post('/sendId', ['id' => '1']);
         $response->assertStatus(200);
+        $response = $this->post('/sendId', ['id' => 'test']);
+        $response->assertStatus(302);
+
     }
 }
 
