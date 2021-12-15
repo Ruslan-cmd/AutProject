@@ -18,11 +18,15 @@ Route::get('/','AuthController@showLoginForm')->name('show_login_form');
 Route::get('/showRegisterForm','AuthController@showRegisterForm')->name('show_register_form');
 Route::post('/register','AuthController@register')->name('register');
 Route::post('/login','AuthController@login')->name('login');
+//reset password
+Route::get('/resetPassword','AuthController@resetPassword')->name('reset_password');
+Route::post('/getCode','AuthController@getCode')->name('get_code');
+Route::get('/sendCode','AuthController@sendCode')->name('send_code');
 //history
 Route::get('/showHistoryForm', 'HistoryController@showHistoryForm')->name('show_history_form');
-Route::post('/sendId', 'HistoryController@sendIdAndGetHistory')->name('send_id');
-Route::post('/sendFullName', 'HistoryController@sendFullNameAndGetHistory')->name('send_full_name');
-Route::post('/sendNumberOfPass', 'HistoryController@sendNumberOfPass')->name('send_number_of_pass');
+Route::get('/sendId', 'HistoryController@sendIdAndGetHistory')->name('send_id');
+Route::get('/sendFullName', 'HistoryController@sendFullNameAndGetHistory')->name('send_full_name');
+Route::get('/sendNumberOfPass', 'HistoryController@sendNumberOfPass')->name('send_number_of_pass');
 //new pass
 Route::get('/showFormForCreatingNewPass', 'CreateNewPassController@showFormForCreatingNewPass')->name('show_form_for_create_new_pass');
 Route::put('/createNewPass', 'CreateNewPassController@createNewPass')->name('create_new_pass');

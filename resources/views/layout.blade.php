@@ -21,6 +21,9 @@
         </div>
     </div>
 </div>
+<div>
+    <a href="{{route('show_register_form')}}" accesskey="1" title="">Регистрация нового системного администратора</a>
+</div>
 @yield('show_history')
 @yield('show_form_for_create_new_pass')
 @yield('show_delete_form')

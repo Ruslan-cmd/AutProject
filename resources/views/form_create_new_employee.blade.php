@@ -14,8 +14,8 @@
     @endforeach
 @endif
 <form method='POST' action="{{route('create_employee')}}">
-    {{ csrf_field() }}
-    {{ method_field('PUT') }}
+    @csrf
+    @method('PUT')
     <h1>Устройство нового сотрудника</h1>
     <ul>
         <li class="li"><label>

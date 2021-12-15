@@ -10,8 +10,7 @@
     @endforeach
 @endif
 <form method='POST' action="{{route('register')}}">
-    {{ csrf_field() }}
-
+    @csrf
     <h1>Регистрация</h1>
     <ul>
         <li class="li"><label>

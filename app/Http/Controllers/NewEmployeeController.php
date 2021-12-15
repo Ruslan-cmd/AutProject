@@ -10,7 +10,7 @@ class NewEmployeeController extends Controller
 {
     public function showFormCreateNewEmployee()
     {
-        return view('show_form_create_new_employee');
+        return view('form_create_new_employee');
     }
 
     public function createEmployee(Request $request)

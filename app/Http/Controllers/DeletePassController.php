@@ -9,7 +9,7 @@ class DeletePassController extends Controller
 {
     public function showDeleteForm()
     {
-        return view('show_delete_form');
+        return view('delete_form');
 
     }
 

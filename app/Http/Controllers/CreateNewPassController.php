@@ -10,7 +10,7 @@ class CreateNewPassController extends Controller
 {
     public function showFormForCreatingNewPass()
     {
-        return view('show_form_for_new_pass');
+        return view('form_for_new_pass');
     }
 
     public function createNewPass(Request $request)

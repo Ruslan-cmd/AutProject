@@ -12,7 +12,7 @@ class HistoryController extends Controller
 
     public function showHistoryForm()
     {
-        return view('show_history_form');
+        return view('history_form');
     }
 
 
@@ -26,7 +26,7 @@ class HistoryController extends Controller
 
             'id.required' => 'Необходимо указать номер карты',
             'id.numeric' => 'Номер карты не может быть текстом',
-            //'id.max' => 'Максимум 3 символа',
+
             'id.exists'=> 'Данного значения нет в базе данных'
 
         ]);
@@ -36,11 +36,8 @@ class HistoryController extends Controller
             ->with('numbers', 'numbers.employees')
             ->get(); //беру коллекцию элементов, исходя из данных запроса
 
-        //if ($idInformation->count() == 0) {
-        //    return redirect('/showHistoryForm')->with('status_of_id', 'Данный ID не найден в базе данных');
-       // }
 
-        return view('show_history_form', [
+        return view('history_form', [
                 'idInforms' => $idInformation
             ]
         );
@@ -64,7 +61,7 @@ class HistoryController extends Controller
             return redirect('/showHistoryForm')->with('status_of_full_name', 'Данный пользователь не найден в базе данных');
         }
 
-        return view('show_history_form', [
+        return view('history_form', [
                 'fullNameInforms' => $fullNameInformation
             ]
         );
@@ -90,7 +87,7 @@ class HistoryController extends Controller
             return redirect('/showHistoryForm')->with('status_of_number', 'Данный номер пропуска не найден в базе данных');
         }
 
-        return view('show_history_form', [
+        return view('history_form', [
             'passNumbersInforms' => $passNumberInformation
         ]);
 

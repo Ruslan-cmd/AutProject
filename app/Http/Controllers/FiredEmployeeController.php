@@ -9,7 +9,7 @@ class FiredEmployeeController extends Controller
 {
     public function showFormForFiredEmployee()
     {
-        return view('show_form_for_fired_employee');
+        return view('form_for_fired_employee');
     }
 
     public function fireEmployee(Request $request)

@@ -14,8 +14,8 @@
     @endforeach
 @endif
 <form method='POST' action="{{route('delete_pass')}}">
-    {{ csrf_field() }}
-    {{ method_field('PUT') }}
+    @csrf
+    @method('PUT')
     <h1>Форма для удаления пропуска</h1>
     <ul>
         <li class="li"><label>

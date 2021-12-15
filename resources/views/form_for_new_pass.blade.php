@@ -14,8 +14,8 @@
     @endforeach
 @endif
 <form method='POST' action="{{route('create_new_pass')}}">
-    {{ csrf_field() }}
-    {{ method_field('PUT') }}
+    @csrf
+    @method('PUT')
     <h1>Создание нового пропуска</h1>
     <ul>
         <li class="li"><label>

@@ -7,6 +7,9 @@
 </head>
 <body>
 @if ($errors->any())
+    {{$idInforms = NULL}}
+    {{$fullNameInforms = NULL}}
+    {{$passNumbersInforms = NULL}}
     @foreach ($errors->all() as $message)
         <p class="error" style="color:red;margin-bottom:10px">
             {{$message}}
@@ -22,9 +25,11 @@
 @if (session('status_of_number'))
     <p class="success" id="reserv_success_msg">{{session('status_of_number')}}</p>
 @endif
-
-<form method='POST' action="{{route('send_id')}}">
-    {{ csrf_field() }}
+@if (session('register_message'))
+    <p class="success" id="reserv_success_msg">{{session('register_message')}}</p>
+@endif
+<form method='GET' action="{{route('send_id')}}">
+    @csrf
     <h1>Получение истории пропуска по его ID</h1>
     <ul>
         <li class="li"><label>
@@ -34,8 +39,8 @@
     <button class="button" type="submit">Выполнить</button>
 </form>
 
-<form method='POST' action="{{route('send_number_of_pass')}}">
-    {{ csrf_field() }}
+<form method='GET' action="{{route('send_number_of_pass')}}">
+    @csrf
     <h1>Получение истории пропуска по номеру</h1>
     <ul>
         <li class="li"><label>
@@ -45,8 +50,8 @@
     <button class="button" type="submit">Выполнить</button>
 </form>
 
-<form method='POST' action="{{route('send_full_name')}}">
-    {{ csrf_field() }}
+<form method='GET' action="{{route('send_full_name')}}">
+    @csrf
     <h1>Получение истории пропуска по его владельцу</h1>
     <ul>
         <li class="li"><label>

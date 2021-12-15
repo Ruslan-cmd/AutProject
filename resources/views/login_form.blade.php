@@ -12,7 +12,7 @@
     @endforeach
 @endif
 <form method='POST' action="{{route('login')}}">
-    {{ csrf_field() }}
+    @csrf
     <h1>Вход в систему</h1>
     <ul>
         <li class="li"><label>
@@ -22,7 +22,7 @@
                 <input class="input" type="text" name="password" id="password" placeholder="password"/>
             </label></li>
         <div>
-            <a href="{{route('show_register_form')}}" accesskey="1" title="">Регистрация в системе</a>
+            <a href="{{route('reset_password')}}" accesskey="1" title="">Сбросить пароль</a>
         </div>
     </ul>
     <button class="button" type="submit">Войти в систему</button>
