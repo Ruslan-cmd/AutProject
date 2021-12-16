@@ -20,7 +20,7 @@ class DeletePassController extends Controller
         $passNumber = PassNumber::query()->where('card_number', '=', \request()->get('pass_number'))
             ->with('employees')
             ->first();
-
+        //апгрейд статуса и даты удаления пропуска
         if ($passNumber) {
             $passNumber->update([
                 'is_active' => false,
@@ -28,14 +28,15 @@ class DeletePassController extends Controller
             ]);
             $passNumber->save();
 
-            // Нахожу сотрудника с самой свежей связью с пропуском и модифицирую его deleted_at
-            $createdAt = NULL;
+            // Нахожу сотрудника с самой свежей связью с пропуском так как сотрудников на пропуске может быть множество и следовательно связей тоже и модифицирую его deleted_at
+            $createdAt = NULL; // НУЛ для того, что вести начальное сравнение
             $employeeWithLastDate = NULL;
             foreach ($passNumber->employees as $employee) {
                 if ($employee->pivot->created_at > $createdAt) {
                     $employeeWithLastDate = $employee;
                 }
             }
+            //апгрейд в промежуточной таблице
             $passNumber->employees()->updateExistingPivot($employeeWithLastDate, [
                 'deleted_at' => now()
             ]);
@@ -43,20 +44,15 @@ class DeletePassController extends Controller
         }
         return redirect('/showFormDeletePass')->with('Contact_status', 'Такого номера пропуска нет в системе, вы ошиблись');
 
-
     }
 
     public function validationData(Request $request)
     {
-
-
         $this->validate($request, [
             'pass_number' => 'required',
 
         ], [
             'pass_number.required' => 'Необходимо указать номер карты',
         ]);
-
-
     }
 }

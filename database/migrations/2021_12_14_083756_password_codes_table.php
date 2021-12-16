@@ -15,6 +15,7 @@ class PasswordCodesTable extends Migration
     {
         Schema::create('password_codes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('email')->index();
             $table->string('code')->index();
             $table->timestamps();
         });

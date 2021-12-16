@@ -11,6 +11,9 @@
         </p>
     @endforeach
 @endif
+@if (session('sendCodeError'))
+    <p class="success" id="reserv_success_msg">{{session('sendCodeError')}}</p>
+@endif
 <form method='POST' action="{{route('login')}}">
     @csrf
     <h1>Вход в систему</h1>

@@ -18,22 +18,28 @@ class CreateNewPassController extends Controller
         $this->validationData($request);
 
         // для пропусков, которые уже были когда либо с системе и имели id!
-        $pass = Pass::query()->where('id', '=', \request()->get('pass_id'))->first();
+        // нет выборки на основе статуса is_active, начиная с первого удаленного\потерянного ТАК КАК не всегда система заполняет 100 процентов утерянных пропусков
+        // нужен более тотальный контроль над тем, под какми id оздается пропуск
+        $pass = Pass::query()->where('id', '=', \request()->get('pass_id'))->first(); //получение пропуска соответствующего введенному pass_id
         if ($pass) {
             $passNumber = new PassNumber();
             $passNumber->card_number = request('pass_number');
             $passNumber->system_number = request('system_number');
             $passNumber->is_active = true;
-            $pass->numbers()->save($passNumber);
+            $pass->numbers()->save($passNumber); //сохранение в базе данных информации о новом пропуске с учетом отношений между таблицами
+            return redirect('/showFormForCreatingNewPass')->with('new_pass_message', 'Новый пропуск добавлен в систему');
+            //проверка введеного id, он должен  новый следующим по счету, не более  - инкрементирую
         } elseif ((\request()->get('pass_id')) == ((Pass::query()->pluck('id')->last()) + 1)) {
-            $pass = new Pass();
+            $pass = new Pass(); //создание нового уникального id
             $pass->save();
             $passNumber = new PassNumber();
             $passNumber->card_number = request('pass_number');
             $passNumber->system_number = request('system_number');
             $passNumber->is_active = true;
             $pass->numbers()->save($passNumber);
-        } else return 'ERROR';
+            return redirect('/showFormForCreatingNewPass')->with('new_pass_message', 'Новый пропуск добавлен в систему');
+        }
+        return redirect('/showFormForCreatingNewPass')->with('new_pass_error_message', 'Введены некорректные данные, данного pass_id не существует');
     }
 
     public function validationData(Request $request)

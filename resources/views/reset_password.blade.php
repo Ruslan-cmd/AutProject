@@ -2,10 +2,7 @@
     <link  rel="stylesheet" href="{{asset('css/css.css')}}" />
 </head>
 Система сброса пароля
-
-@if(!($control ??  ''))
 <br>
-Пожалуйста, введите email зарегистрированного администратора. Он на данный email(если такой имеется) будет выслан код для сброса пароля:
 @if ($errors->any())
     @foreach ($errors->all() as $message)
         <p class="error" style="color:red;margin-bottom:10px">
@@ -13,9 +10,12 @@
         </p>
     @endforeach
 @endif
+@if (session('confirmPasswordError'))
+    <p class="success" id="reserv_success_msg">{{session('confirmPasswordError')}}</p>
+@endif
 <form method='POST' action="{{route('get_code')}}">
     @csrf
-
+    @method('PUT')
     <h1>Сброс пароля</h1>
     <ul>
         <li class="li"><label>
@@ -24,8 +24,8 @@
     </ul>
     <button class="button" type="submit">Получить код</button>
 </form>
-@endif
-@if($control ?? '')
+
+@if($showCodeForm ?? '')
     <form method='GET' action="{{route('send_code')}}">
         @csrf
 
@@ -37,4 +37,19 @@
         </ul>
         <button class="button" type="submit">Сбросить пароль</button>
     </form>
-    @endif
+@endif
+@if($showNewPasswordForm ?? '')
+    <form method='POST' action="{{route('send_new_password')}}">
+        @csrf
+        <h1>Введите новый пароль</h1>
+        <ul>
+            <li class="li"><label>
+                    <input class="input" type="text" name="password" id="password" placeholder="new password"/>
+                </label></li>
+            <li class="li"><label>
+                    <input class="input" type="text" name="confirmPassword" id="confirmPassword" placeholder="confirm new password"/>
+                </label></li>
+        </ul>
+        <button class="button" type="submit">Задать новый пароль и авторизоваться</button>
+    </form>
+@endif

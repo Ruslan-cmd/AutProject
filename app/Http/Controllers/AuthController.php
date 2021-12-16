@@ -33,7 +33,7 @@ class AuthController extends Controller
         $user->password = bcrypt(\request('password'));
         $user->save();
         auth('web')->login($user);
-        return redirect('/showHistoryForm')->with('register_message','Вы зарегистрированы в системе');
+        return redirect('/showHistoryForm')->with('register_message', 'Вы зарегистрированы в системе');
     }
 
     public function login(LoginPostRequest $request)
@@ -49,7 +49,6 @@ class AuthController extends Controller
         return redirect('/showLoginForm')->withErrors([
             'email' => 'Пользователь не найден'
         ]);
-
     }
 
     public function resetPassword()
@@ -79,15 +78,47 @@ class AuthController extends Controller
         Mail::to($toEmail)->send(new FeedbackMail($comment));
         $passwordCode = new PasswordCode();
         $passwordCode->code = $random;
+        $passwordCode->email = \request('email');
         $passwordCode->save();
-        return view('reset_password');
+        return view('reset_password', [
+            'showCodeForm' => true  //необходимо для того, чтобы при выполнении данного метода, на экране появилась следуюзая форма, но никак не сразу без выполнения метода
+        ]);
 
     }
 
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function sendCode(Request $request)
     {
-    if (PasswordCode::query()->where('code', '=', \request('code'))->first()){
-return 'LOLOL';
+      /*  $this->validate($request, [
+            'code' => 'required|exists:password_codes,code',
+        ], [
+
+            'code.required' => 'Необходимо указать Код',
+            'code.exists' => 'Код неверен'
+
+        ]); */
+        if (PasswordCode::query()->where('code', '=', \request('code'))->first()) {
+            return view('reset_password', [
+                'showNewPasswordForm' => true
+            ]);
+        }
+        return view('reset_password', [
+           'showCodeForm' => true
+        ]);
     }
+
+    public function sendNewPassword(Request $request)
+    {
+        if ((\request('password')) == (\request('confirmPassword'))) {
+            $emailForLastUser = PasswordCode::query()->pluck('email')->first(); //получаю email последнего пользователя для дальнейшего изменения пароля для этого пользователя
+            $lastUser = User::query()->where('email', '=', $emailForLastUser)->first();
+            $lastUser->password = \request('password');
+            $lastUser->save();
+            // auth('web')->attempt($lastUser);
+            return view('history_form');
+        }
+        return redirect('resetPassword')->with('confirmPasswordError', 'Пароли не совпадают');
     }
 }
