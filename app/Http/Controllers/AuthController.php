@@ -46,7 +46,7 @@ class AuthController extends Controller
             return redirect('showHistoryForm');
         }
 
-        return redirect('/showLoginForm')->withErrors([
+        return redirect('/')->withErrors([
             'email' => 'Пользователь не найден'
         ]);
     }
@@ -91,22 +91,16 @@ class AuthController extends Controller
      */
     public function sendCode(Request $request)
     {
-      /*  $this->validate($request, [
-            'code' => 'required|exists:password_codes,code',
-        ], [
 
-            'code.required' => 'Необходимо указать Код',
-            'code.exists' => 'Код неверен'
-
-        ]); */
         if (PasswordCode::query()->where('code', '=', \request('code'))->first()) {
             return view('reset_password', [
                 'showNewPasswordForm' => true
             ]);
+        } else {
+            PasswordCode::query()->first()->delete();  //Удаление последней записи с кодом, для исключения взлома
+            return view('reset_password', [
+            ]);
         }
-        return view('reset_password', [
-           'showCodeForm' => true
-        ]);
     }
 
     public function sendNewPassword(Request $request)
