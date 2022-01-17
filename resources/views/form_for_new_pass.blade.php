@@ -13,9 +13,6 @@
         </p>
     @endforeach
 @endif
-@if (session('new_pass_error_message'))
-    <p class="success" id="reserv_success_msg">{{session('new_pass_error_message')}}</p>
-@endif
 @if (session('new_pass_message'))
     <p class="success" id="reserv_success_msg">{{session('new_pass_message')}}</p>
 @endif

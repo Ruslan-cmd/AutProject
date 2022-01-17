@@ -32,10 +32,13 @@ class NewEmployeeController extends Controller
 
 
         $this->validate($request, [
+            'card_number' => 'required|numeric|exists:pass_numbers,card_number',
             'full_name' => 'required',
 
         ], [
-            'full_name.required' => 'Необходимо указать ФИО сотрудника',
+            'full_name.required' => 'Ошибка: необходимо указать ФИО сотрудника',
+            'card_number.numeric' =>'Ошибка: поле не может содержать цифры',
+            'card_number.exists' =>'Ошибка: номера пропуска нет в базе данных',
         ]);
 
     }

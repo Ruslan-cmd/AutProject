@@ -46,10 +46,11 @@ class FiredEmployeeController extends Controller
 
 
         $this->validate($request, [
-            'full_name' => 'required',
+            'full_name' => 'required|exists:employees,full_name',
 
         ], [
-            'full_name.required' => 'Необходимо указать ФИО сотрудника',
+            'full_name.required' => 'Ошибка: необходимо указать ФИО сотрудника',
+            'full_name.exists' => 'Ошибка: данного сотрудника нет в базе данных'
         ]);
 
 

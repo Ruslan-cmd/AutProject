@@ -17,18 +17,16 @@ class CreateNewPassController extends Controller
     {
         $this->validationData($request);
 
-        // для пропусков, которые уже были когда либо с системе и имели id!
-        // нет выборки на основе статуса is_active, начиная с первого удаленного\потерянного ТАК КАК не всегда система заполняет 100 процентов утерянных пропусков
-        // нужен более тотальный контроль над тем, под какми id оздается пропуск
         $pass = Pass::query()->where('id', '=', \request()->get('pass_id'))->first(); //получение пропуска соответствующего введенному pass_id
+        // exists pass
         if ($pass) {
             $passNumber = new PassNumber();
             $passNumber->card_number = request('pass_number');
             $passNumber->system_number = request('system_number');
             $passNumber->is_active = true;
-            $pass->numbers()->save($passNumber); //сохранение в базе данных информации о новом пропуске с учетом отношений между таблицами
+            $pass->numbers()->save($passNumber);
             return redirect('/showFormForCreatingNewPass')->with('new_pass_message', 'Новый пропуск добавлен в систему');
-            //проверка введеного id, он должен  новый следующим по счету, не более  - инкрементирую
+            // new pass
         } elseif ((\request()->get('pass_id')) == ((Pass::query()->pluck('id')->last()) + 1)) {
             $pass = new Pass(); //создание нового уникального id
             $pass->save();
@@ -47,15 +45,17 @@ class CreateNewPassController extends Controller
 
 
         $this->validate($request, [
-            'pass_id' => 'required|max:3',
-            'pass_number' => 'required',
-            'system_number' => 'required',
+            'pass_id' => 'required|numeric ',
+            'pass_number' => 'required|numeric',
+            'system_number' => 'required|numeric',
 
         ], [
-            'pass_id.max' => 'Длина номера карты максимум 3 символа',
-            'pass_id.required' => 'Необходимо указать номер карты',
-            'pass_number.required' => 'Необходимо указать номер карты',
-            'system_number.required' => 'Необходимо указать номер карты в системе'
+            'pass_id.required' => 'Ошибка: необходимо указать номер карты',
+            'pass_id.numeric' => ' Ошибка: ID не может содержать буквы',
+            'pass_number.required' => 'Ошибка: необходимо указать номер карты',
+            'pass_number.numeric' => ' Ошибка: номер пропуска не может содержать буквы',
+            'system_number.required' => 'Ошибка: необходимо указать номер карты в системе',
+            'system_number.numeric' => ' Ошибка: номер пропуска в системе не может содержать буквы',
         ]);
 
 

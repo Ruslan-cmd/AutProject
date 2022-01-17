@@ -48,18 +48,22 @@ class HistoryController extends Controller
     public function sendFullNameAndGetHistory(Request $request)
     {
         $this->validate($request, [
-            'full_name' => 'required',
+            'full_name' => 'required|exists:employees,full_name',
         ], [
-            'full_name.required' => 'Необходимо указать имя пользователя',
+            'full_name.required' => 'Ошибка: необходимо указать ФИО пользователя',
+            'full_name.exists' => 'Ошибка: в базе данных не найден данный пользователь'
         ]);
 
         $fullNameInformation = Employee::query()
             ->where('full_name', '=', \request()->get('full_name'))
             ->with('passNumbers', 'passNumbers.pass')
             ->get();
-        if ($fullNameInformation->count() == 0) {
-            return redirect('/showHistoryForm')->with('status_of_full_name', 'Данный пользователь не найден в базе данных');
-        }
+
+       /*
+       if ($fullNameInformation->count() == 0) {
+          return redirect('/showHistoryForm')->with('status_of_full_name', 'Данный пользователь не найден в базе данных');
+       }
+       */
 
         return view('history_form', [
                 'fullNameInforms' => $fullNameInformation
@@ -72,10 +76,11 @@ class HistoryController extends Controller
     {
 
         $this->validate($request, [
-            'pass_number' => 'required',
+            'pass_number' => 'required|numeric|exists:pass_numbers,card_number',
         ], [
-            'pass_number.required' => 'Необходимо номер пропуска',
-            'pass_number.numeric' => 'Номер карты не может быть текстом'
+            'pass_number.required' => 'Ошибка: необходимо номер пропуска',
+            'pass_number.numeric' => 'Ошибка: номер карты не может быть текстом',
+            'pass_number.exists' => 'Ошибка: номер карты не найден в базе'
         ]);
         $passNumberInformation = PassNumber::query()
             ->where('card_number', '=', \request()->get('pass_number'))
@@ -83,9 +88,10 @@ class HistoryController extends Controller
             ->get();
 
 
-        if ($passNumberInformation->count() == 0) {
+      /*  if ($passNumberInformation->count() == 0) {
             return redirect('/showHistoryForm')->with('status_of_number', 'Данный номер пропуска не найден в базе данных');
         }
+      */
 
         return view('history_form', [
             'passNumbersInforms' => $passNumberInformation

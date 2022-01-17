@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
+use Database\Factories\UserFactory;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-
+use Illuminate\Contracts\Auth\Authenticatable;
 class FormTest extends TestCase
 {
     /**
@@ -15,8 +17,11 @@ class FormTest extends TestCase
      */
     public function test_example()
     {
-       // $response = $this->post('/register', ['name' => 'test ','email'=>'test@test.ru','password'=>'123']);
-
-      //  $response->assertStatus(200);
+      $user = new User;
+      auth()->login($user);
+        $response = $this->actingAs($user,'web')
+            ->withSession(['email' => 'ruslantelenkov@mail.ru'])
+            ->get('/');
     }
+
 }

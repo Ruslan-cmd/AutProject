@@ -27,13 +27,19 @@ class AuthController extends Controller
      */
     public function register(RegisterPostRequest $request)
     {
-        $user = new User();
-        $user->name = request('name');
-        $user->email = request('email');
-        $user->password = bcrypt(\request('password'));
-        $user->save();
-        auth('web')->login($user);
-        return redirect('/showHistoryForm')->with('register_message', 'Вы зарегистрированы в системе');
+        $email = User::query()->where('email' , '=', \request('email'))->first();
+        if ($email){
+            return redirect('/showRegisterForm')->withErrors('Ошибка: email уже есть в базе данных ');
+        }
+        else {
+            $user = new User();
+            $user->name = request('name');
+            $user->email = request('email');
+            $user->password = bcrypt(\request('password'));
+            $user->save();
+            auth('web')->login($user);
+            return redirect('/showHistoryForm')->with('register_message', 'Вы зарегистрированы в системе');
+        }
     }
 
     public function login(LoginPostRequest $request)
@@ -80,8 +86,9 @@ class AuthController extends Controller
         $passwordCode->code = $random;
         $passwordCode->email = \request('email');
         $passwordCode->save();
+        // next form after this method
         return view('reset_password', [
-            'showCodeForm' => true  //необходимо для того, чтобы при выполнении данного метода, на экране появилась следуюзая форма, но никак не сразу без выполнения метода
+            'showCodeForm' => true
         ]);
 
     }
@@ -97,7 +104,7 @@ class AuthController extends Controller
                 'showNewPasswordForm' => true
             ]);
         } else {
-            PasswordCode::query()->first()->delete();  //Удаление последней записи с кодом, для исключения взлома
+            PasswordCode::query()->first()->delete();  // last code - delete
             return view('reset_password', [
             ]);
         }
@@ -106,11 +113,11 @@ class AuthController extends Controller
     public function sendNewPassword(Request $request)
     {
         if ((\request('password')) == (\request('confirmPassword'))) {
-            $emailForLastUser = PasswordCode::query()->pluck('email')->first(); //получаю email последнего пользователя для дальнейшего изменения пароля для этого пользователя
+            $emailForLastUser = PasswordCode::query()->pluck('email')->first(); // email of last user
             $lastUser = User::query()->where('email', '=', $emailForLastUser)->first();
-            $lastUser->password = \request('password');
+            $lastUser->password = bcrypt(\request('password'));
             $lastUser->save();
-            // auth('web')->attempt($lastUser);
+             auth('web')->login($lastUser);
             return view('history_form');
         }
         return redirect('resetPassword')->with('confirmPasswordError', 'Пароли не совпадают');

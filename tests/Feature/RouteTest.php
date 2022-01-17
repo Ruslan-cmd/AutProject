@@ -17,13 +17,7 @@ class RouteTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response = $this->get('/showFormForCreatingNewPass');
-        $response->assertStatus(200);
-        $response = $this->get('/showFormDeletePass');
-        $response->assertStatus(200);
-        $response = $this->get('/showFormFiredEmployee');
-        $response->assertStatus(200);
-        $response = $this->get('/showFormCreateNewEmployee');
+        $response = $this->get('/resetPassword');
         $response->assertStatus(200);
     }
 
@@ -31,7 +25,7 @@ class RouteTest extends TestCase
     {
 
         $response = $this->post('/sendId', ['id' => '1']);
-        $response->assertStatus(200);
+        $response->assertStatus(405);
         $response = $this->post('/sendId', ['id' => 'test']);
         $response->assertStatus(302);
 

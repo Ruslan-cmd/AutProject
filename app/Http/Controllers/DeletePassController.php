@@ -28,8 +28,8 @@ class DeletePassController extends Controller
             ]);
             $passNumber->save();
 
-            // Нахожу сотрудника с самой свежей связью с пропуском так как сотрудников на пропуске может быть множество и следовательно связей тоже и модифицирую его deleted_at
-            $createdAt = NULL; // НУЛ для того, что вести начальное сравнение
+            // last employee-pass connect
+            $createdAt = NULL;
             $employeeWithLastDate = NULL;
             foreach ($passNumber->employees as $employee) {
                 if ($employee->pivot->created_at > $createdAt) {
@@ -42,17 +42,20 @@ class DeletePassController extends Controller
             ]);
 
         }
-        return redirect('/showFormDeletePass')->with('Contact_status', 'Такого номера пропуска нет в системе, вы ошиблись');
+
+        return redirect('/showFormDeletePass')->with('delete_status', 'Пропуск удален');
 
     }
 
     public function validationData(Request $request)
     {
         $this->validate($request, [
-            'pass_number' => 'required',
+            'pass_number' => 'required|numeric|exists:pass_numbers,card_number',
 
         ], [
-            'pass_number.required' => 'Необходимо указать номер карты',
+            'pass_number.required' => 'Ошибка: необходимо указать номер карты',
+            'pass_number.exists' => 'Ошибка: данного пропуска нет в базе данных',
+            'pass_number.numeric' => 'Ошибка: номер пропуска не может сожержать буквы'
         ]);
     }
 }

@@ -13,6 +13,9 @@
         </p>
     @endforeach
 @endif
+@if (session('delete_status'))
+    <p>{{session('delete_status')}}</p>
+@endif
 <form method='POST' action="{{route('delete_pass')}}">
     @csrf
     @method('PUT')

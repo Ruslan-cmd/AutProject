@@ -107,7 +107,7 @@
         </tr>
         @foreach($fullNameInforms ?? '' as $fullNameInform)
             @foreach($fullNameInform->passNumbers as $passNumber)
-                @foreach($passNumber->pass as $pass)
+
                     <tr>
                         <td colspan="2">{{$fullNameInform->full_name}}</td>
                         <td colspan="2">{{$fullNameInform->created_at}}</td>
@@ -118,7 +118,7 @@
                         <td colspan="2">{{$passNumber->deleted_at}}</td>
                         <td colspan="2">{{$passNumber->pass_id}}</td>
                     </tr>
-                @endforeach
+
             @endforeach
         @endforeach
     </table>
