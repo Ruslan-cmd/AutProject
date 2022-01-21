@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/sendId', 'HistoryController@sendIdAndGetHistory')->name('send_id');
     Route::get('/sendFullName', 'HistoryController@sendFullNameAndGetHistory')->name('send_full_name');
     Route::get('/sendNumberOfPass', 'HistoryController@sendNumberOfPass')->name('send_number_of_pass');
-//new pass
+    //new pass
     Route::get('/showFormForCreatingNewPass', 'CreateNewPassController@showFormForCreatingNewPass')->name('show_form_for_create_new_pass');
     Route::put('/createNewPass', 'CreateNewPassController@createNewPass')->name('create_new_pass');
 //delete pass

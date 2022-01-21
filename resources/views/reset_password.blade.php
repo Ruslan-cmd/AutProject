@@ -1,5 +1,5 @@
 <head>
-    <link  rel="stylesheet" href="{{asset('css/css.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/css.css')}}"/>
 </head>
 Система сброса пароля
 <br>
@@ -11,7 +11,7 @@
     @endforeach
 @endif
 @if (session('confirmPasswordError'))
-    <p class="success" id="reserv_success_msg">{{session('confirmPasswordError')}}</p>
+     <p class="success" id="reserv_success_msg">{{session('confirmPasswordError')}}</p>
 @endif
 <form method='POST' action="{{route('get_code')}}">
     @csrf
@@ -47,7 +47,8 @@
                     <input class="input" type="text" name="password" id="password" placeholder="new password"/>
                 </label></li>
             <li class="li"><label>
-                    <input class="input" type="text" name="confirmPassword" id="confirmPassword" placeholder="confirm new password"/>
+                    <input class="input" type="text" name="confirmPassword" id="confirmPassword"
+                           placeholder="confirm new password"/>
                 </label></li>
         </ul>
         <button class="button" type="submit">Задать новый пароль и авторизоваться</button>

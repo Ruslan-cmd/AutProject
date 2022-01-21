@@ -27,11 +27,10 @@ class AuthController extends Controller
      */
     public function register(RegisterPostRequest $request)
     {
-        $email = User::query()->where('email' , '=', \request('email'))->first();
-        if ($email){
+        $email = User::query()->where('email', '=', \request('email'))->first();
+        if ($email) {
             return redirect('/showRegisterForm')->withErrors('Ошибка: email уже есть в базе данных ');
-        }
-        else {
+        } else {
             $user = new User();
             $user->name = request('name');
             $user->email = request('email');
@@ -51,7 +50,6 @@ class AuthController extends Controller
             Mail::to($toEmail)->send(new FeedbackMail($comment));
             return redirect('showHistoryForm');
         }
-
         return redirect('/')->withErrors([
             'email' => 'Пользователь не найден'
         ]);
@@ -117,7 +115,7 @@ class AuthController extends Controller
             $lastUser = User::query()->where('email', '=', $emailForLastUser)->first();
             $lastUser->password = bcrypt(\request('password'));
             $lastUser->save();
-             auth('web')->login($lastUser);
+            auth('web')->login($lastUser);
             return view('history_form');
         }
         return redirect('resetPassword')->with('confirmPasswordError', 'Пароли не совпадают');

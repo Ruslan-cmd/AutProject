@@ -17,5 +17,15 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(200);
+
+    }
+    public function testAuthorize(){
+
+        $response = $this ->post('/login',[
+            'email' => 'ruslantelenkov@mail.ru',
+            'password' => '111111',
+        ]);
+    $response = $this->get('/showHistoryForm');
+    $response->assertUnauthorized();
     }
 }

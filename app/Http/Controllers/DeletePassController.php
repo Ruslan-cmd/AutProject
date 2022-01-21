@@ -27,7 +27,6 @@ class DeletePassController extends Controller
                 'deleted_at' => now()
             ]);
             $passNumber->save();
-
             // last employee-pass connect
             $createdAt = NULL;
             $employeeWithLastDate = NULL;

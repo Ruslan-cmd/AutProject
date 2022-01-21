@@ -21,14 +21,5 @@ class RouteTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_interacting_with_headers()
-    {
-
-        $response = $this->post('/sendId', ['id' => '1']);
-        $response->assertStatus(405);
-        $response = $this->post('/sendId', ['id' => 'test']);
-        $response->assertStatus(302);
-
-    }
 }
 

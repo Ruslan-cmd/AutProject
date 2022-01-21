@@ -40,6 +40,6 @@
     transition: all .3s ease-out;
 }
 .rectangle a:hover:after {
-    left: -.5em;
+     left: -.5em;
     border-left-color: #9097A2;
 }

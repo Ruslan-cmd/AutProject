@@ -16,7 +16,6 @@ class HistoryController extends Controller
     }
 
 
-
     public function sendIdAndGetHistory(Request $request)
     {
 
@@ -27,7 +26,7 @@ class HistoryController extends Controller
             'id.required' => 'Необходимо указать номер карты',
             'id.numeric' => 'Номер карты не может быть текстом',
 
-            'id.exists'=> 'Данного значения нет в базе данных'
+            'id.exists' => 'Данного значения нет в базе данных'
 
         ]);
 
@@ -59,11 +58,11 @@ class HistoryController extends Controller
             ->with('passNumbers', 'passNumbers.pass')
             ->get();
 
-       /*
-       if ($fullNameInformation->count() == 0) {
-          return redirect('/showHistoryForm')->with('status_of_full_name', 'Данный пользователь не найден в базе данных');
-       }
-       */
+        /*
+        if ($fullNameInformation->count() == 0) {
+           return redirect('/showHistoryForm')->with('status_of_full_name', 'Данный пользователь не найден в базе данных');
+        }
+        */
 
         return view('history_form', [
                 'fullNameInforms' => $fullNameInformation
@@ -88,10 +87,10 @@ class HistoryController extends Controller
             ->get();
 
 
-      /*  if ($passNumberInformation->count() == 0) {
-            return redirect('/showHistoryForm')->with('status_of_number', 'Данный номер пропуска не найден в базе данных');
-        }
-      */
+        /*  if ($passNumberInformation->count() == 0) {
+              return redirect('/showHistoryForm')->with('status_of_number', 'Данный номер пропуска не найден в базе данных');
+          }
+        */
 
         return view('history_form', [
             'passNumbersInforms' => $passNumberInformation

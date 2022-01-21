@@ -37,8 +37,8 @@ class NewEmployeeController extends Controller
 
         ], [
             'full_name.required' => 'Ошибка: необходимо указать ФИО сотрудника',
-            'card_number.numeric' =>'Ошибка: поле не может содержать цифры',
-            'card_number.exists' =>'Ошибка: номера пропуска нет в базе данных',
+            'card_number.numeric' => 'Ошибка: поле не может содержать цифры',
+            'card_number.exists' => 'Ошибка: номера пропуска нет в базе данных',
         ]);
 
     }
